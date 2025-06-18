@@ -25,7 +25,20 @@ function gestionaLinks() {
 function carregaProductes() {
     // TO-DO (Exercici 3)
     // Realitza una petició a l'endpoint /get-products del servidor, i genera el product-card corresponent per a cada producte.
-
+    fetch('http://localhost:3000/get-products')
+    .then(res => res.json())
+    .then(productes => {
+      const llista = document.getElementById('llista-productes');
+      llista.innerHTML = '';
+      productes.forEach(p => {
+        const card = document.createElement('product-card');
+        card.setAttribute('title', p.title);
+        card.setAttribute('price', p.price);
+        card.setAttribute('image', p.image);
+        card.setAttribute('description', p.description);
+        llista.appendChild(card);
+      });
+    });
     // TO-DO (Exercici 4)
 
 }
