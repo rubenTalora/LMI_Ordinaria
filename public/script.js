@@ -34,10 +34,10 @@ function carregaProductes() {
       
       productes.forEach(p => {
         const card = document.createElement('product-card');
-        card.setAttribute('title', p.title);
-        card.setAttribute('price', p.price);
-        card.setAttribute('image', p.image);
-        card.setAttribute('description', p.description);
+        card.setAttribute('tinomtle', p.nom);
+        card.setAttribute('preu_unitari', p.preu_unitari);
+        card.setAttribute('imatge', p.imatge);
+        card.setAttribute('descripcio', p.descripcio);
         llista.appendChild(card);
     // TO-DO (Exercici 4)
         const option = document.createElement('option');
@@ -66,6 +66,29 @@ function preparaFormulari() {
 
         const formData = new FormData(form);
 
+        const dades = {
+            nom: formData.get('nom'),
+            email: formData.get('email'),
+            data: formData.get('data'),
+            producte: formData.get('producte')
+        };
+
+        fetch('http://localhost:3000/concertar-cita', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dades)
+        })
+        .then(res => res.blob())
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'confirmacio-cita.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        });
         /* TO-DO
  
             Prepara un objece JSON amb la informació guardada al formulari

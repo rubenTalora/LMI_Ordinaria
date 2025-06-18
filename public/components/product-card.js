@@ -9,8 +9,8 @@ class ProductCard extends HTMLElement {
     // El mètode per actualitzar el contingut del component
     connectedCallback() {
         // TO-DO: Obtenim les propietats del producte des de l'atribut del component
-        const id = this.getAttribute('producte-id') || 'Producte desconegur';
-        const nom = this.getAttribute('producte-nom') || 'Producte desconegur';
+        const id = this.getAttribute('producte-id') || 'Producte desconegut';
+        const nom = this.getAttribute('producte-nom') || 'Producte desconegut';
         const descripcio = this.getAttribute('producte-descripcio') || '';
         const preu_unitari = this.getAttribute('producte-preu_unitari') || '0.00';
         const imatge = this.getAttribute('producte-img') || '';
