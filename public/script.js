@@ -30,6 +30,8 @@ function carregaProductes() {
     .then(productes => {
       const llista = document.getElementById('llista-productes');
       llista.innerHTML = '';
+      select.innerHTML = '';
+      
       productes.forEach(p => {
         const card = document.createElement('product-card');
         card.setAttribute('title', p.title);
@@ -37,10 +39,13 @@ function carregaProductes() {
         card.setAttribute('image', p.image);
         card.setAttribute('description', p.description);
         llista.appendChild(card);
-      });
-    });
     // TO-DO (Exercici 4)
-
+        const option = document.createElement('option');
+        option.value = p.title;
+        option.textContent = p.title;
+        select.appendChild(option);
+        });
+    });
 }
 
 
