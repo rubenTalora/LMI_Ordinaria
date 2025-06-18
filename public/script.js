@@ -3,8 +3,23 @@ import './components/product-card.js';
 
 
 function gestionaLinks() {
-    // TO-DO (Exercici 1)
-}
+            // TO-DO (Exercici 1)
+            const links = document.querySelectorAll('nav a');
+            const seccions = document.querySelectorAll('main > section');
+
+            function mostraSeccio(id) {
+                seccions.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+            }
+
+            mostraSeccio('inici');
+            links.forEach(link => {
+                link.onclick = e => {
+                    e.preventDefault();
+                    mostraSeccio(link.getAttribute('href').substring(1));
+                };
+            });
+        }
 
 
 function carregaProductes() {

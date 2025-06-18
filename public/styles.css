@@ -159,3 +159,6 @@ footer {
 product-card {
     width: 100%; /* El Web Component ocupa tota l'amplada de la cel·la */
 }
+
+main > section { display: none; }
+main > section.active { display: block; }
