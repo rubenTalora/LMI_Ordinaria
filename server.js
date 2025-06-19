@@ -91,20 +91,31 @@ app.post('/concertar-cita', async (req, res) => {
     }
 });
 
+const fs = require('fs').promises;
 // Funció auxiliar per a generar l'XML
 function generarXML(dades) {
     /*
     TO-DO: Exercici 6a
-
+    
     Amb les dades rebudes, generem un XML, amb el format corresponent (veieu enunciat)
     */
+   const xml = `
+        <cita>
+        <client>
+            <nom>${dades.nom}</nom>
+            <email>${dades.email}</email>
+            <telefon>${dades.telefon || ''}</telefon>
+        </client>
+        <producte>${dades.producte}</producte>
+        <data>${dades.data}</data>
+        </cita>
+        `.trim();
+        
     return `
-<cita>
-  ...
-</cita>
     `;
 }
 
+const { exec } = require('child_process');
 // Funció auxiliar per aplicar l'XSLT
 function transformarXSLT(xmlPath, foPath) {
     return new Promise((resolve, reject) => {
@@ -139,7 +150,7 @@ function generarPDF(foPath, pdfPath) {
 
         */
 
-        const cmd = ``;
+        const cmd = `fop ${foPath} ${pdfPath}`;
 
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
